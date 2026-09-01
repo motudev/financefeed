@@ -1,0 +1,12 @@
+resources:
+  pipelines:
+    medallion_news_pipeline:
+      name: "Medallion News Pipeline"
+      serverless: true
+      development: true
+      libraries:
+        - file:
+            # Paths are relative to the project root
+            path: ../src/financefeed_pipeline.py
+      schema: ${var.schema}
+      catalog: ${var.catalog}

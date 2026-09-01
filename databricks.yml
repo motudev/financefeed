@@ -7,17 +7,18 @@ bundle:
 include:
   - resources/*.yml
 
-artifacts:
-  python_artifact:
-    type: whl
-    build: uv build --wheel
-
 # Variable declarations. These variables are assigned in the dev/prod targets below.
 variables:
   catalog:
     description: The catalog to use
   schema:
     description: The schema to use
+
+resources:
+  schemas:
+    dev_schema:
+      name: ${var.schema}
+      catalog_name: ${var.catalog}
 
 targets:
   dev:
@@ -31,7 +32,7 @@ targets:
       host: https://dbc-dc4c06f4-16dc.cloud.databricks.com
     variables:
       catalog: workspace
-      schema: ${workspace.current_user.short_name}
+      schema: financefeed
   prod:
     mode: production
     workspace:
@@ -40,7 +41,7 @@ targets:
       root_path: /Workspace/Users/roosxfabian@gmail.com/.bundle/${bundle.name}/${bundle.target}
     variables:
       catalog: workspace
-      schema: prod
+      schema: financefeed
     permissions:
       - user_name: roosxfabian@gmail.com
         level: CAN_MANAGE

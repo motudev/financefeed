@@ -1,0 +1,8 @@
+resources:
+  volumes:
+    raw_news_volume:
+      name: raw_financial_news
+      catalog_name: ${var.catalog}
+      schema_name: ${var.schema}
+      volume_type: MANAGED
+      comment: "Raw JSON payloads ingested from the VPS"
